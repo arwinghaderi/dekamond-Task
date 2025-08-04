@@ -1,27 +1,15 @@
-// templates/Login/Button/LoginButton.tsx
 import React from 'react'
-import styles from './LoginButton.module.scss'
+import styles from './Button.module.scss'
 
-interface LoginButtonProps {
-  onClick: () => void
-  disabled?: boolean
-  children?: React.ReactNode
+type Props = {
+  text: string
+  type?: 'button' | 'submit'
 }
 
-const LoginButton: React.FC<LoginButtonProps> = ({
-  onClick,
-  disabled = false,
-  children = 'ورود',
-}) => {
+export default function Button({ text, type = 'button' }: Props) {
   return (
-    <button
-      className={styles.loginButton}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {children}
+    <button type={type} className={styles.button}>
+      {text}
     </button>
   )
 }
-
-export default LoginButton

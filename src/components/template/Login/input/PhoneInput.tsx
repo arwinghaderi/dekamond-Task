@@ -1,42 +1,26 @@
-// templates/Login/Input/PhoneInput.tsx
 import React, { forwardRef } from 'react'
-import styles from './PhoneInput.module.scss'
+import styles from './Input.module.scss'
 
-interface PhoneInputProps {
-  label?: string
-  value: string
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+type Props = {
+  type: string
+  placeholder: string
   error?: string
-  placeholder?: string
 }
 
-const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
-  (
-    {
-      label = 'شماره موبایل',
-      value,
-      onChange,
-      error,
-      placeholder = 'مثلاً 09123456789',
-    },
-    ref
-  ) => {
-    return (
-      <div className={styles.inputWrapper}>
-        <label className={styles.label}>{label}</label>
-        <input
-          ref={ref}
-          type="tel"
-          className={`${styles.inputField} ${error ? styles.errorBorder : ''}`}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          maxLength={11}
-        />
-        {error && <span className={styles.errorText}>{error}</span>}
-      </div>
-    )
-  }
-)
+const Input = forwardRef<
+  HTMLInputElement,
+  Props & React.InputHTMLAttributes<HTMLInputElement>
+>(({ type, placeholder, error, ...rest }, ref) => (
+  <div className={styles.wrapper}>
+    <input
+      type={type}
+      placeholder={placeholder}
+      ref={ref}
+      {...rest}
+      className={styles.input}
+    />
+    {error && <span className={styles.error}>{error}</span>}
+  </div>
+))
 
-export default PhoneInput
+export default Input
