@@ -7,4 +7,8 @@ export interface User {
   picture: {
     large: string
   }
+  location?: {
+    city?: string
+    country?: string
+  }
 }

@@ -1,11 +1,15 @@
-// src/app/layout.tsx
-import './globals.css'
-import { ReactNode } from 'react'
+import { UserProvider } from '@/context/UserContext.tsx'
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="fa">
-      <body>{children}</body>
+      <body>
+        <UserProvider>{children}</UserProvider>
+      </body>
     </html>
   )
 }

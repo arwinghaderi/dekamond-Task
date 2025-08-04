@@ -1,3 +1,4 @@
+// app/auth/login/page.tsx
 'use client'
 import React from 'react'
 import { useForm } from 'react-hook-form'
@@ -13,9 +14,9 @@ import { FaSignInAlt } from 'react-icons/fa'
 type LoginForm = z.infer<typeof loginSchema>
 
 export default function LoginPage() {
-    const router = useRouter()
-    const [loading, setLoading] = React.useState<boolean>(false)
-    const [error, setError] = React.useState<string>('')
+  const router = useRouter()
+  const [loading, setLoading] = React.useState<boolean>(false)
+  const [error, setError] = React.useState<string>('')
 
   const {
     register,
@@ -25,23 +26,28 @@ export default function LoginPage() {
     resolver: zodResolver(loginSchema),
   })
 
-const onSubmit = async (data: LoginForm) => {
-  setLoading(true)
-  setError('')
-  try {
-    const res = await fetch('https://randomuser.me/api/?results=1&nat=us')
-    if (!res.ok) throw new Error('fetch error')
-    const json = await res.json()
-    const user = json.results[0]
-    localStorage.setItem('user', JSON.stringify(user))
-    router.push('/dashboard')
-  } catch (err) {
-    setError('خطایی رخ داد! لطفاً دوباره امتحان کنید.')
-  } finally {
-    setLoading(false)
-  }
-}
+  const onSubmit = async (data: LoginForm) => {
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('https://randomuser.me/api/?results=1&nat=us')
+      if (!res.ok) throw new Error('fetch error')
+      const json = await res.json()
+      const user = json.results[0]
 
+      await fetch('/api/set-cookie', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+      })
+
+      router.push('/dashboard')
+    } catch (err) {
+      setError('خطایی رخ داد! لطفاً دوباره امتحان کنید.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -59,7 +65,7 @@ const onSubmit = async (data: LoginForm) => {
           icon={<FaSignInAlt />}
           type="submit"
           disabled={loading}
-        />{' '}
+        />
       </form>
     </div>
   )

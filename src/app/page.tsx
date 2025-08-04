@@ -20,7 +20,7 @@ export default function HomePage() {
           </p>
 
           <div className={styles.buttons}>
-            <Link href="/auth" className={styles.primaryBtn}>
+            <Link href="/auth/login" className={styles.primaryBtn}>
               ورود به سیستم
             </Link>
           </div>
