@@ -1,11 +1,12 @@
-// app/dashboard/page.tsx
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import styles from './dashboard.module.scss'
+import LogoutButton from '../../components/template/dashbord/Button/LogoutButton'
 
 export default async function DashboardPage() {
   const cookieStore = await cookies()
   const userCookie = cookieStore?.get('user')
+  console.log(userCookie)
 
   if (!userCookie?.value) {
     redirect('/auth/login')
@@ -16,6 +17,7 @@ export default async function DashboardPage() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
+        <LogoutButton />
         <img
           src={user.picture.large}
           alt={user.name.first}

@@ -7,6 +7,7 @@ type Props = {
   loading?: boolean
   disabled?: boolean
   icon?: React.ReactNode
+  onClick?: () => void | Promise<void>
 }
 
 export default function Button({
@@ -15,12 +16,14 @@ export default function Button({
   loading = false,
   disabled = false,
   icon,
+  onClick,
 }: Props) {
   return (
     <button
       type={type}
       className={styles.button}
       disabled={disabled || loading}
+      onClick={onClick}
     >
       {loading ? (
         <span className={styles.loader}></span>
