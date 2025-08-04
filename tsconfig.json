@@ -20,8 +20,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/src/components/template/*": ["./src/components/template/*"],
-      "@/src/lib/validation/*": ["./src/lib/validation/*"]
+      "@/components/template/*": ["./src/components/template/*"],
+      "@/lib/validation/*": ["./src/lib/validation/*"],
+      "@/types/": ["./src/types/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
