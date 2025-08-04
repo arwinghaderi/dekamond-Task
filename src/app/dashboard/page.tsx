@@ -1,12 +1,11 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import styles from './dashboard.module.scss'
-import LogoutButton from '../../components/template/dashbord/Button/LogoutButton'
+import LogoutButton from '@/components/template/dashbord/Button/LogoutButton'
 
 export default async function DashboardPage() {
   const cookieStore = await cookies()
   const userCookie = cookieStore?.get('user')
-  console.log(userCookie)
 
   if (!userCookie?.value) {
     redirect('/auth/login')
